@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Acompanhamento 30 Dias — Lux &amp; Co.</title>
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --gold: #C9922A;
+    --gold-light: #e8b060;
+    --white: #ffffff;
+    --off-white: #f8f7f4;
+    --text: #2d2d2d;
+    --text-light: #666;
+    --border: #e0ddd8;
+    --success: #2a7a4a;
+    --shadow: 0 4px 24px rgba(27,42,74,0.10);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', serif;
+    color: var(--text);
+    background: var(--off-white);
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* HEADER */
+  .book-header {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 48px 32px;
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+  }
+
+  .book-header .brand {
+    font-size: 0.75rem; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 16px;
+  }
+
+  .book-header h1 {
+    font-size: 2rem; margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .book-header h1 em { color: var(--gold); font-style: italic; }
+
+  .book-header p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.95rem; margin-top: 12px;
+  }
+
+  /* SECTION */
+  .section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 24px;
+    break-inside: avoid;
+  }
+
+  .section h2 {
+    color: var(--navy); font-size: 1.3rem;
+    margin-bottom: 8px; display: flex;
+    align-items: center; gap: 10px;
+  }
+
+  .section-num {
+    background: var(--navy); color: var(--gold);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    flex-shrink: 0;
+  }
+
+  .section p { color: var(--text-light); font-size: 0.92rem; margin-bottom: 16px; }
+
+  /* RODA DA VIDA */
+  .roda-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    margin-top: 16px;
+  }
+
+  .roda-item label {
+    display: block; font-size: 0.82rem;
+    color: var(--navy); font-weight: 600; margin-bottom: 4px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .roda-item input[type="range"] {
+    width: 100%; accent-color: var(--gold);
+    height: 6px; cursor: pointer;
+  }
+
+  .roda-score {
+    font-size: 0.78rem; color: var(--gold);
+    font-weight: 700; float: right;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* TEXTAREA */
+  textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'Georgia', serif; font-size: 0.9rem;
+    color: var(--text); resize: vertical;
+    min-height: 80px; outline: none;
+    transition: border-color 0.2s;
+    background: var(--off-white);
+  }
+
+  textarea:focus { border-color: var(--gold); background: var(--white); }
+
+  /* MATRIZ GUT */
+  .gut-table {
+    width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.85rem;
+  }
+
+  .gut-table th {
+    background: var(--navy); color: var(--white);
+    padding: 10px 12px; text-align: left;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.04em;
+  }
+
+  .gut-table td {
+    padding: 8px 12px; border-bottom: 1px solid var(--border);
+  }
+
+  .gut-table td input[type="text"] {
+    width: 100%; border: none; background: transparent;
+    font-family: 'Georgia', serif; font-size: 0.85rem;
+    color: var(--text); outline: none;
+    padding: 4px 0;
+  }
+
+  .gut-table td input[type="number"] {
+    width: 52px; border: 1px solid var(--border);
+    border-radius: 4px; padding: 4px 6px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem; text-align: center;
+    background: var(--off-white);
+  }
+
+  .gut-total {
+    font-weight: 700; color: var(--gold);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* ═══════════════════════════════════════
+     MATRIZ DE IMPACTO x ESFORÇO (NEW!)
+     ═══════════════════════════════════════ */
+  .impact-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .quadrant {
+    padding: 16px;
+    min-height: 140px;
+    position: relative;
+  }
+
+  .quadrant-label {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .q-quick { background: #eafaf1; }
+  .q-quick .quadrant-label { color: #1e8449; }
+
+  .q-strategic { background: #fff8e8; }
+  .q-strategic .quadrant-label { color: #9c6a00; }
+
+  .q-fill { background: #f8f9fa; }
+  .q-fill .quadrant-label { color: #666; }
+
+  .q-avoid { background: #fdf2f2; }
+  .q-avoid .quadrant-label { color: #c0392b; }
+
+  .quadrant textarea {
+    width: 100%; min-height: 80px;
+    background: transparent; border: 1px dashed rgba(0,0,0,0.15);
+    font-size: 0.82rem; padding: 8px;
+    border-radius: 6px;
+  }
+
+  .quadrant textarea:focus {
+    background: rgba(255,255,255,0.8);
+    border-color: var(--gold);
+  }
+
+  .matrix-axes {
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: 8px;
+    margin-top: 8px; margin-bottom: 4px;
+  }
+
+  .axis-label {
+    font-size: 0.72rem; color: var(--text-light);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  .axis-line {
+    height: 2px; background: linear-gradient(to right, var(--border), var(--navy));
+    border-radius: 1px;
+  }
+
+  .axis-vertical-wrap {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .axis-v-label {
+    font-size: 0.72rem; color: var(--text-light);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    writing-mode: vertical-rl; text-orientation: mixed;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  .impact-instructions {
+    background: rgba(201,146,42,0.08);
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px; margin-bottom: 16px;
+    font-size: 0.85rem; color: var(--text-light);
+  }
+
+  .impact-instructions strong { color: var(--navy); }
+
+  .quadrant-headers {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 4px; margin-top: 16px;
+  }
+
+  .qh {
+    text-align: center;
+    font-size: 0.72rem; font-weight: 700;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 4px;
+  }
+
+  .qh.high { color: #1e8449; }
+  .qh.low { color: #c0392b; }
+
+  /* FSF DAILY */
+  .fsf-trio {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-top: 16px;
+  }
+
+  .fsf-card {
+    text-align: center; padding: 20px 14px;
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+
+  .fsf-card .fsf-icon { font-size: 1.6rem; margin-bottom: 8px; }
+  .fsf-card .fsf-title { font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .fsf-card textarea { min-height: 70px; font-size: 0.82rem; }
+
+  /* BUTTONS */
+  .btn-save {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px;
+    background: var(--gold); color: var(--navy);
+    font-weight: 700; font-size: 0.9rem;
+    border: none; border-radius: var(--radius-sm);
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-top: 16px;
+  }
+
+  .btn-save:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-save-all {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 16px 24px;
+    background: var(--navy); color: var(--white);
+    font-weight: 700; font-size: 1rem;
+    border: none; border-radius: var(--radius-sm);
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-top: 32px;
+  }
+
+  .btn-save-all:hover { background: #243557; transform: translateY(-1px); }
+
+  .save-notice {
+    display: none; background: rgba(42,122,74,0.1);
+    border: 1px solid rgba(42,122,74,0.2);
+    color: var(--success); padding: 10px 16px;
+    border-radius: var(--radius-sm); font-size: 0.85rem;
+    margin-top: 8px; text-align: center;
+  }
+
+  /* PRINT */
+  @media print {
+    body { padding: 20px; }
+    .btn-save, .btn-save-all, .no-print { display: none !important; }
+    .section { break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 20px 14px 60px; }
+    .roda-grid { grid-template-columns: 1fr; }
+    .fsf-trio { grid-template-columns: 1fr; }
+    .impact-grid-2x2 { grid-template-columns: 1fr; }
+    .quadrant-headers { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="book-header">
+  <div class="brand">Lux &amp; Co. Consulting · Michel C. Berestinas</div>
+  <h1>Caderno de<br><em>Acompanhamento 30 Dias</em></h1>
+  <p>Ferramentas práticas para clareza, decisão e movimento real.<br>
+  Salve seus dados e volte quando quiser — vai acumulando dia a dia.</p>
+</div>
+
+<!-- SECTION 1 — RODA DA VIDA -->
+<div class="section">
+  <h2>
+    <span class="section-num">1</span>
+    Roda da Vida — Como estou hoje?
+  </h2>
+  <p>Avalie cada área de 0 a 10. Seja honesto — não a versão do LinkedIn, a versão real.</p>
+
+  <div class="roda-grid">
+    <div class="roda-item">
+      <label>Saúde <span class="roda-score" id="s1-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s1" oninput="updateScore('s1')">
+    </div>
+    <div class="roda-item">
+      <label>Carreira <span class="roda-score" id="s2-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s2" oninput="updateScore('s2')">
+    </div>
+    <div class="roda-item">
+      <label>Finanças <span class="roda-score" id="s3-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s3" oninput="updateScore('s3')">
+    </div>
+    <div class="roda-item">
+      <label>Família <span class="roda-score" id="s4-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s4" oninput="updateScore('s4')">
+    </div>
+    <div class="roda-item">
+      <label>Relacionamentos <span class="roda-score" id="s5-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s5" oninput="updateScore('s5')">
+    </div>
+    <div class="roda-item">
+      <label>Lazer <span class="roda-score" id="s6-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s6" oninput="updateScore('s6')">
+    </div>
+    <div class="roda-item">
+      <label>Espiritualidade <span class="roda-score" id="s7-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s7" oninput="updateScore('s7')">
+    </div>
+    <div class="roda-item">
+      <label>Propósito <span class="roda-score" id="s8-val">5</span></label>
+      <input type="range" min="0" max="10" value="5" id="s8" oninput="updateScore('s8')">
+    </div>
+  </div>
+
+  <textarea id="roda-obs" placeholder="O que este padrão revela sobre você?" style="margin-top:16px;"></textarea>
+  <button class="btn-save no-print" onclick="saveSection('roda')">💾 Salvar Roda da Vida</button>
+  <div class="save-notice" id="roda-saved">✓ Salvo localmente no seu dispositivo!</div>
+</div>
+
+<!-- SECTION 2 — MATRIZ GUT -->
+<div class="section">
+  <h2>
+    <span class="section-num">2</span>
+    Matriz GUT — Priorizando com inteligência
+  </h2>
+  <p>Liste os principais desafios. Avalie Gravidade (G), Urgência (U) e Tendência (T) de 1 a 5. Multiplique — o maior número é seu ponto de entrada.</p>
+
+  <table class="gut-table">
+    <thead>
+      <tr>
+        <th>Desafio / Problema</th>
+        <th>G</th>
+        <th>U</th>
+        <th>T</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" id="gut1-d" placeholder="Ex: Saúde financeira" oninput="calcGut(1)"></td>
+        <td><input type="number" id="gut1-g" min="1" max="5" value="3" oninput="calcGut(1)"></td>
+        <td><input type="number" id="gut1-u" min="1" max="5" value="3" oninput="calcGut(1)"></td>
+        <td><input type="number" id="gut1-t" min="1" max="5" value="3" oninput="calcGut(1)"></td>
+        <td class="gut-total" id="gut1-r">27</td>
+      </tr>
+      <tr>
+        <td><input type="text" id="gut2-d" placeholder="Ex: Comunicação na equipe" oninput="calcGut(2)"></td>
+        <td><input type="number" id="gut2-g" min="1" max="5" value="3" oninput="calcGut(2)"></td>
+        <td><input type="number" id="gut2-u" min="1" max="5" value="3" oninput="calcGut(2)"></td>
+        <td><input type="number" id="gut2-t" min="1" max="5" value="3" oninput="calcGut(2)"></td>
+        <td class="gut-total" id="gut2-r">27</td>
+      </tr>
+      <tr>
+        <td><input type="text" id="gut3-d" placeholder="Ex: Clareza de propósito" oninput="calcGut(3)"></td>
+        <td><input type="number" id="gut3-g" min="1" max="5" value="3" oninput="calcGut(3)"></td>
+        <td><input type="number" id="gut3-u" min="1" max="5" value="3" oninput="calcGut(3)"></td>
+        <td><input type="number" id="gut3-t" min="1" max="5" value="3" oninput="calcGut(3)"></td>
+        <td class="gut-total" id="gut3-r">27</td>
+      </tr>
+      <tr>
+        <td><input type="text" id="gut4-d" placeholder="Adicione mais um..." oninput="calcGut(4)"></td>
+        <td><input type="number" id="gut4-g" min="1" max="5" value="3" oninput="calcGut(4)"></td>
+        <td><input type="number" id="gut4-u" min="1" max="5" value="3" oninput="calcGut(4)"></td>
+        <td><input type="number" id="gut4-t" min="1" max="5" value="3" oninput="calcGut(4)"></td>
+        <td class="gut-total" id="gut4-r">27</td>
+      </tr>
+      <tr>
+        <td><input type="text" id="gut5-d" placeholder="Adicione mais um..." oninput="calcGut(5)"></td>
+        <td><input type="number" id="gut5-g" min="1" max="5" value="3" oninput="calcGut(5)"></td>
+        <td><input type="number" id="gut5-u" min="1" max="5" value="3" oninput="calcGut(5)"></td>
+        <td><input type="number" id="gut5-t" min="1" max="5" value="3" oninput="calcGut(5)"></td>
+        <td class="gut-total" id="gut5-r">27</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn-save no-print" onclick="saveSection('gut')">💾 Salvar Matriz GUT</button>
+  <div class="save-notice" id="gut-saved">✓ Salvo localmente no seu dispositivo!</div>
+</div>
+
+<!-- SECTION 3 — MATRIZ DE IMPACTO x ESFORÇO (NOVA!) -->
+<div class="section">
+  <h2>
+    <span class="section-num">3</span>
+    Matriz de Impacto × Esforço — Onde focar sua energia
+  </h2>
+  <p>Classifique suas tarefas, projetos ou decisões nos 4 quadrantes. Use como guia para priorizar o que fazer agora vs. o que adiar ou delegar.</p>
+
+  <div class="impact-instructions">
+    <strong>Como usar:</strong> Para cada tarefa, pense: <em>qual o impacto no meu objetivo?</em> e <em>quanto esforço/tempo vai custar?</em>
+    Anote nos quadrantes abaixo e revise semanalmente.
+  </div>
+
+  <!-- Axis labels -->
+  <div style="text-align:center; margin-bottom:6px;">
+    <span style="font-size:0.72rem; color:var(--text-light); font-family:'Helvetica Neue',Arial,sans-serif; text-transform:uppercase; letter-spacing:0.08em;">
+      ← BAIXO ESFORÇO ──────── ESFORÇO ──────── ALTO ESFORÇO →
+    </span>
+  </div>
+
+  <div style="display:flex; gap:8px; align-items:flex-start;">
+    <!-- Vertical label -->
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:24px; height:320px; flex-shrink:0;">
+      <span style="font-size:0.65rem; color:var(--text-light); font-family:'Helvetica Neue',Arial,sans-serif; text-transform:uppercase; letter-spacing:0.06em; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap;">
+        ALTO IMPACTO ↑ ──── IMPACTO ──── ↓ BAIXO IMPACTO
+      </span>
+    </div>
+
+    <!-- 2x2 grid -->
+    <div class="impact-grid-2x2" style="flex:1;">
+      <!-- Q1: Alto Impacto + Baixo Esforço = FAÇA JÁ -->
+      <div class="quadrant q-quick">
+        <div class="quadrant-label">
+          <span>🚀</span>
+          <span>Faça Agora</span>
+        </div>
+        <p style="font-size:0.75rem; color:#1e8449; margin-bottom:8px; font-family:'Helvetica Neue',Arial,sans-serif;">Alto Impacto · Baixo Esforço</p>
+        <textarea id="q-quick" placeholder="Tarefas de alto retorno e pouco esforço. Prioridade máxima.&#10;Ex: Responder cliente importante, ajustar proposta, delegar tarefa simples"></textarea>
+      </div>
+
+      <!-- Q2: Alto Impacto + Alto Esforço = PLANEJE -->
+      <div class="quadrant q-strategic">
+        <div class="quadrant-label">
+          <span>📋</span>
+          <span>Planeje e Execute</span>
+        </div>
+        <p style="font-size:0.75rem; color:#9c6a00; margin-bottom:8px; font-family:'Helvetica Neue',Arial,sans-serif;">Alto Impacto · Alto Esforço</p>
+        <textarea id="q-strategic" placeholder="Projetos importantes que exigem planejamento.&#10;Ex: Lançar novo serviço, restruturar proposta de valor, abrir empresa"></textarea>
+      </div>
+
+      <!-- Q3: Baixo Impacto + Baixo Esforço = PREENCHA SE SOBRAR TEMPO -->
+      <div class="quadrant q-fill">
+        <div class="quadrant-label">
+          <span>📝</span>
+          <span>Se sobrar tempo</span>
+        </div>
+        <p style="font-size:0.75rem; color:#666; margin-bottom:8px; font-family:'Helvetica Neue',Arial,sans-serif;">Baixo Impacto · Baixo Esforço</p>
+        <textarea id="q-fill" placeholder="Tarefas de rotina ou baixa prioridade.&#10;Ex: Organizar arquivos, atualizar perfis, responder e-mails secundários"></textarea>
+      </div>
+
+      <!-- Q4: Baixo Impacto + Alto Esforço = EVITE -->
+      <div class="quadrant q-avoid">
+        <div class="quadrant-label">
+          <span>⛔</span>
+          <span>Evite ou Delegue</span>
+        </div>
+        <p style="font-size:0.75rem; color:#c0392b; margin-bottom:8px; font-family:'Helvetica Neue',Arial,sans-serif;">Baixo Impacto · Alto Esforço</p>
+        <textarea id="q-avoid" placeholder="Tarefas que drenam energia sem retorno.&#10;Ex: Reuniões desnecessárias, burocracias evitáveis, projetos sem alinhamento com objetivo"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <textarea id="impact-reflection" placeholder="Reflexão: O que esta matriz revela sobre como você tem usado seu tempo e energia?" style="min-height:70px;"></textarea>
+  </div>
+
+  <button class="btn-save no-print" onclick="saveSection('impact')">💾 Salvar Matriz de Impacto × Esforço</button>
+  <div class="save-notice" id="impact-saved">✓ Salvo localmente no seu dispositivo!</div>
+</div>
+
+<!-- SECTION 4 — FSF DIÁRIO -->
+<div class="section">
+  <h2>
+    <span class="section-num">4</span>
+    Método FSF — Meu dia com estrutura
+  </h2>
+  <p>"Foco aponta o caminho. Suporte sustenta a caminhada. Fundamento mantém a direção quando tudo ao redor treme." — Michel C. Berestinas</p>
+
+  <div class="fsf-trio">
+    <div class="fsf-card">
+      <div class="fsf-icon">🎯</div>
+      <div class="fsf-title">FOCO</div>
+      <p style="font-size:0.78rem; color:var(--text-light); margin-bottom:8px;">Qual é o próximo passo concreto, possível, com data?</p>
+      <textarea id="fsf-foco" placeholder="Uma ação específica para hoje..."></textarea>
+    </div>
+    <div class="fsf-card">
+      <div class="fsf-icon">🤝</div>
+      <div class="fsf-title">SUPORTE</div>
+      <p style="font-size:0.78rem; color:var(--text-light); margin-bottom:8px;">Quem ou o que me ajuda a sustentar hoje?</p>
+      <textarea id="fsf-suporte" placeholder="Pessoa, hábito ou ambiente..."></textarea>
+    </div>
+    <div class="fsf-card">
+      <div class="fsf-icon">⚓</div>
+      <div class="fsf-title">FUNDAMENTO</div>
+      <p style="font-size:0.78rem; color:var(--text-light); margin-bottom:8px;">O que me sustenta quando os resultados ainda não chegaram?</p>
+      <textarea id="fsf-fundamento" placeholder="Minha âncora interna..."></textarea>
+    </div>
+  </div>
+
+  <button class="btn-save no-print" onclick="saveSection('fsf')">💾 Salvar FSF do Dia</button>
+  <div class="save-notice" id="fsf-saved">✓ Salvo localmente no seu dispositivo!</div>
+</div>
+
+<!-- SECTION 5 — REFLEXÃO DIÁRIA -->
+<div class="section">
+  <h2>
+    <span class="section-num">5</span>
+    Reflexão do Dia
+  </h2>
+
+  <p>Três perguntas simples. Responda com honestidade.</p>
+
+  <div style="display:flex; flex-direction:column; gap:14px; margin-top:12px;">
+    <div>
+      <label style="font-size:0.85rem; font-weight:700; color:var(--navy); display:block; margin-bottom:6px;">
+        🌅 O que foi bem hoje?
+      </label>
+      <textarea id="ref-bem" placeholder="Uma vitória, por menor que seja..." style="min-height:60px;"></textarea>
+    </div>
+    <div>
+      <label style="font-size:0.85rem; font-weight:700; color:var(--navy); display:block; margin-bottom:6px;">
+        🔍 O que eu faria diferente?
+      </label>
+      <textarea id="ref-diferente" placeholder="Uma aprendizagem honesta..." style="min-height:60px;"></textarea>
+    </div>
+    <div>
+      <label style="font-size:0.85rem; font-weight:700; color:var(--navy); display:block; margin-bottom:6px;">
+        ➡️ Qual é meu próximo passo?
+      </label>
+      <textarea id="ref-passo" placeholder="Uma ação concreta para amanhã..." style="min-height:60px;"></textarea>
+    </div>
+  </div>
+
+  <button class="btn-save no-print" onclick="saveSection('ref')">💾 Salvar Reflexão</button>
+  <div class="save-notice" id="ref-saved">✓ Salvo localmente no seu dispositivo!</div>
+</div>
+
+<!-- SAVE ALL BUTTON -->
+<button class="btn-save-all no-print" onclick="saveAll()">
+  💾 Salvar Tudo &amp; Continuar Amanhã
+</button>
+<div class="save-notice" id="all-saved" style="display:none; text-align:center; padding:14px; font-size:0.9rem;">
+  ✅ Todos os dados salvos! Você pode fechar e retornar quando quiser.
+</div>
+
+<!-- FOOTER -->
+<div style="margin-top:40px; text-align:center; padding:24px; border-top:1px solid var(--border);">
+  <p style="font-size:0.82rem; color:var(--text-light);">
+    <strong style="color:var(--navy)">Lux &amp; Co. Consulting</strong> · Michel C. Berestinas · Sydney, Australia<br>
+    <span style="color:var(--gold); font-style:italic;">Think sharp. Move smart.</span>
+  </p>
+  <p style="font-size:0.78rem; color:var(--text-light); margin-top:8px;">
+    Este caderno salva dados localmente no seu dispositivo (localStorage).<br>
+    Para preservar, não limpe o cache do navegador.
+  </p>
+</div>
+
+<script>
+// ─── RODA DA VIDA ───
+function updateScore(id) {
+  const val = document.getElementById(id).value;
+  document.getElementById(id + '-val').textContent = val;
+}
+
+// ─── MATRIZ GUT ───
+function calcGut(row) {
+  const g = parseInt(document.getElementById('gut'+row+'-g').value) || 0;
+  const u = parseInt(document.getElementById('gut'+row+'-u').value) || 0;
+  const t = parseInt(document.getElementById('gut'+row+'-t').value) || 0;
+  document.getElementById('gut'+row+'-r').textContent = g * u * t;
+}
+
+// ─── SAVE SECTION ───
+const STORAGE_KEY = 'luxco_wellness_';
+
+function saveSection(section) {
+  const data = {};
+
+  if (section === 'roda') {
+    for (let i = 1; i <= 8; i++) {
+      data['s'+i] = document.getElementById('s'+i).value;
+    }
+    data.obs = document.getElementById('roda-obs').value;
+  }
+
+  if (section === 'gut') {
+    for (let i = 1; i <= 5; i++) {
+      data['gut'+i+'_d'] = document.getElementById('gut'+i+'-d').value;
+      data['gut'+i+'_g'] = document.getElementById('gut'+i+'-g').value;
+      data['gut'+i+'_u'] = document.getElementById('gut'+i+'-u').value;
+      data['gut'+i+'_t'] = document.getElementById('gut'+i+'-t').value;
+    }
+  }
+
+  if (section === 'impact') {
+    data['quick'] = document.getElementById('q-quick').value;
+    data['strategic'] = document.getElementById('q-strategic').value;
+    data['fill'] = document.getElementById('q-fill').value;
+    data['avoid'] = document.getElementById('q-avoid').value;
+    data['reflection'] = document.getElementById('impact-reflection').value;
+  }
+
+  if (section === 'fsf') {
+    data['foco'] = document.getElementById('fsf-foco').value;
+    data['suporte'] = document.getElementById('fsf-suporte').value;
+    data['fundamento'] = document.getElementById('fsf-fundamento').value;
+  }
+
+  if (section === 'ref') {
+    data['bem'] = document.getElementById('ref-bem').value;
+    data['diferente'] = document.getElementById('ref-diferente').value;
+    data['passo'] = document.getElementById('ref-passo').value;
+  }
+
+  data['savedAt'] = new Date().toISOString();
+
+  try {
+    localStorage.setItem(STORAGE_KEY + section, JSON.stringify(data));
+    const notice = document.getElementById(section + '-saved');
+    if (notice) {
+      notice.style.display = 'block';
+      setTimeout(() => { notice.style.display = 'none'; }, 3000);
+    }
+  } catch(e) {
+    alert('Não foi possível salvar. Verifique o armazenamento do navegador.');
+  }
+}
+
+function saveAll() {
+  ['roda','gut','impact','fsf','ref'].forEach(s => saveSection(s));
+  const notice = document.getElementById('all-saved');
+  notice.style.display = 'block';
+  setTimeout(() => { notice.style.display = 'none'; }, 4000);
+}
+
+// ─── LOAD SAVED DATA ───
+function loadData() {
+  // Load roda
+  try {
+    const roda = JSON.parse(localStorage.getItem(STORAGE_KEY + 'roda') || '{}');
+    for (let i = 1; i <= 8; i++) {
+      if (roda['s'+i]) {
+        document.getElementById('s'+i).value = roda['s'+i];
+        updateScore('s'+i);
+      }
+    }
+    if (roda.obs) document.getElementById('roda-obs').value = roda.obs;
+
+    // Load GUT
+    const gut = JSON.parse(localStorage.getItem(STORAGE_KEY + 'gut') || '{}');
+    for (let i = 1; i <= 5; i++) {
+      if (gut['gut'+i+'_d']) document.getElementById('gut'+i+'-d').value = gut['gut'+i+'_d'];
+      if (gut['gut'+i+'_g']) document.getElementById('gut'+i+'-g').value = gut['gut'+i+'_g'];
+      if (gut['gut'+i+'_u']) document.getElementById('gut'+i+'-u').value = gut['gut'+i+'_u'];
+      if (gut['gut'+i+'_t']) document.getElementById('gut'+i+'-t').value = gut['gut'+i+'_t'];
+      calcGut(i);
+    }
+
+    // Load Impact
+    const impact = JSON.parse(localStorage.getItem(STORAGE_KEY + 'impact') || '{}');
+    if (impact.quick) document.getElementById('q-quick').value = impact.quick;
+    if (impact.strategic) document.getElementById('q-strategic').value = impact.strategic;
+    if (impact.fill) document.getElementById('q-fill').value = impact.fill;
+    if (impact.avoid) document.getElementById('q-avoid').value = impact.avoid;
+    if (impact.reflection) document.getElementById('impact-reflection').value = impact.reflection;
+
+    // Load FSF
+    const fsf = JSON.parse(localStorage.getItem(STORAGE_KEY + 'fsf') || '{}');
+    if (fsf.foco) document.getElementById('fsf-foco').value = fsf.foco;
+    if (fsf.suporte) document.getElementById('fsf-suporte').value = fsf.suporte;
+    if (fsf.fundamento) document.getElementById('fsf-fundamento').value = fsf.fundamento;
+
+    // Load Reflection
+    const ref = JSON.parse(localStorage.getItem(STORAGE_KEY + 'ref') || '{}');
+    if (ref.bem) document.getElementById('ref-bem').value = ref.bem;
+    if (ref.diferente) document.getElementById('ref-diferente').value = ref.diferente;
+    if (ref.passo) document.getElementById('ref-passo').value = ref.passo;
+
+  } catch(e) {
+    console.log('Loading saved data:', e);
+  }
+}
+
+// Auto-load on page open
+window.addEventListener('DOMContentLoaded', loadData);
+</script>
+</body>
+</html>
